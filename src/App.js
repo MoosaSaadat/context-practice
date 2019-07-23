@@ -1,13 +1,14 @@
 import React from "react";
+import PageContent from "./PageContent";
 import Navbar from "./Navbar";
 import Form from "./Form";
 
 function App () {
 	return (
-		<React.Fragment>
+		<PageContent>
 			<Navbar />
 			<Form />
-		</React.Fragment>
+		</PageContent>
 	);
 }
 
