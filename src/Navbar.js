@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useContext } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
@@ -9,52 +9,50 @@ import SearchIcon from "@material-ui/icons/Search";
 import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
 import { withStyles } from "@material-ui/core/styles";
 import { ThemeContext } from "./contexts/ThemeContext";
-import { withLanguageContext } from "./contexts/LanguageContext";
+import { LanguageContext } from "./contexts/LanguageContext";
 import styles from "./styles/NavbarStyles";
 
-class Navbar extends Component {
-	static contextType = ThemeContext;
-	render () {
-		const { classes, languageContext } = this.props;
-		const { toggleTheme, isDarkMode } = this.context;
-		const languageTranslation = {
-			english: "Sign In Form",
-			french: "Formulaire de connexion",
-			spanish: "Formulario de registro"
-		};
-		return (
-			<div className={classes.root}>
-				<AppBar position="static" color={isDarkMode ? "primary" : "default"}>
-					<Toolbar>
-						<IconButton
-							edge="start"
-							className={classes.menuButton}
-							color="inherit"
-							aria-label="Current Language">
-							<VerifiedUserIcon />
-						</IconButton>
-						<Typography className={classes.title} variant="h6" noWrap>
-							{languageTranslation[languageContext.language]}
-						</Typography>
-						<Switch onChange={toggleTheme} />
-						<div className={classes.search}>
-							<div className={classes.searchIcon}>
-								<SearchIcon />
-							</div>
-							<InputBase
-								placeholder="Search…"
-								classes={{
-									root: classes.inputRoot,
-									input: classes.inputInput
-								}}
-								inputProps={{ "aria-label": "Search" }}
-							/>
+function Navbar (props) {
+	const { classes, languageContext } = props;
+	const { toggleTheme, isDarkMode } = useContext(ThemeContext);
+	const { language } = useContext(LanguageContext);
+	const languageTranslation = {
+		english: "Sign In Form",
+		french: "Formulaire de connexion",
+		spanish: "Formulario de registro"
+	};
+	return (
+		<div className={classes.root}>
+			<AppBar position="static" color={isDarkMode ? "primary" : "default"}>
+				<Toolbar>
+					<IconButton
+						edge="start"
+						className={classes.menuButton}
+						color="inherit"
+						aria-label="Current Language">
+						<VerifiedUserIcon />
+					</IconButton>
+					<Typography className={classes.title} variant="h6" noWrap>
+						{languageTranslation[languageContext.language]}
+					</Typography>
+					<Switch onChange={toggleTheme} />
+					<div className={classes.search}>
+						<div className={classes.searchIcon}>
+							<SearchIcon />
 						</div>
-					</Toolbar>
-				</AppBar>
-			</div>
-		);
-	}
+						<InputBase
+							placeholder="Search…"
+							classes={{
+								root: classes.inputRoot,
+								input: classes.inputInput
+							}}
+							inputProps={{ "aria-label": "Search" }}
+						/>
+					</div>
+				</Toolbar>
+			</AppBar>
+		</div>
+	);
 }
 
 export default withLanguageContext(withStyles(styles)(Navbar));
