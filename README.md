@@ -4,12 +4,18 @@ This project is made with React Hooks and Context API
 
 The following is the Component Tree:
 
-- `App`
+ `App`
+
 --- Theme Context Provider
+
 ----- `PageContent`
+
 ------- Language Context Provider
+
 --------- `Navbar`
+
 ----------- LoggedIn Context Provider
+
 ------------- `Form`
 
 ## Context Details
