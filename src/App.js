@@ -1,9 +1,14 @@
 import React from "react";
 import Navbar from "./Navbar";
-import "./App.css";
+import Form from "./Form";
 
 function App () {
-	return <Navbar />;
+	return (
+		<React.Fragment>
+			<Navbar />
+			<Form />
+		</React.Fragment>
+	);
 }
 
 export default App;
