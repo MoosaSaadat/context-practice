@@ -31,5 +31,9 @@ export default (theme) => ({
 	},
 	submit: {
 		marginTop: theme.spacing(3)
+	},
+	loginIcon: {
+		fontSize: "10rem",
+		fill: "#76d275"
 	}
 });

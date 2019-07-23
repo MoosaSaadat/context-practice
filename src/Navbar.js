@@ -11,15 +11,25 @@ import { withStyles } from "@material-ui/core/styles";
 import { ThemeContext } from "./contexts/ThemeContext";
 import { LanguageContext } from "./contexts/LanguageContext";
 import styles from "./styles/NavbarStyles";
+import { FormControlLabel } from "@material-ui/core";
 
 function Navbar (props) {
-	const { classes, languageContext } = props;
+	const { classes } = props;
 	const { toggleTheme, isDarkMode } = useContext(ThemeContext);
 	const { language } = useContext(LanguageContext);
 	const languageTranslation = {
-		english: "Sign In Form",
-		french: "Formulaire de connexion",
-		spanish: "Formulario de registro"
+		english: {
+			title: "Sign In Form",
+			colorMode: "Color Mode"
+		},
+		french: {
+			title: "Formulaire de connexion",
+			colorMode: "Mode de couleur"
+		},
+		spanish: {
+			title: "Formulario de registro",
+			colorMode: "Modo de color"
+		}
 	};
 	return (
 		<div className={classes.root}>
@@ -33,26 +43,16 @@ function Navbar (props) {
 						<VerifiedUserIcon />
 					</IconButton>
 					<Typography className={classes.title} variant="h6" noWrap>
-						{languageTranslation[languageContext.language]}
+						{languageTranslation[language].title}
 					</Typography>
-					<Switch onChange={toggleTheme} />
-					<div className={classes.search}>
-						<div className={classes.searchIcon}>
-							<SearchIcon />
-						</div>
-						<InputBase
-							placeholder="Search…"
-							classes={{
-								root: classes.inputRoot,
-								input: classes.inputInput
-							}}
-							inputProps={{ "aria-label": "Search" }}
-						/>
-					</div>
+					<FormControlLabel
+						control={<Switch onChange={toggleTheme} />}
+						label={languageTranslation[language].colorMode}
+					/>
 				</Toolbar>
 			</AppBar>
 		</div>
 	);
 }
 
-export default withLanguageContext(withStyles(styles)(Navbar));
+export default withStyles(styles)(Navbar);
