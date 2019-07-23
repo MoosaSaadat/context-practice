@@ -17,6 +17,10 @@ export default (theme) => ({
 		alignItems: "center",
 		padding: `${theme.spacing(2)}px ${theme.spacing(3)}px`
 	},
+	typo: {
+		marginTop: theme.spacing(2),
+		marginBottom: theme.spacing(2)
+	},
 	avatar: {
 		margin: theme.spacing(0),
 		backgroundColor: theme.palette.secondary.main

@@ -1,18 +1,17 @@
 import React, { Component } from "react";
-import { withStyles } from "@material-ui/core/styles";
-
-const styles = {
-	root: {
-		backgroundColor: "white",
-		width: "100vw",
-		height: "100vh"
-	}
-};
+import { ThemeContext } from "./contexts/ThemeContext";
 
 class PageContent extends Component {
+	static contextType = ThemeContext;
 	render () {
-		return <div className={this.props.classes.root}>{this.props.children}</div>;
+		const { isDarkMode } = this.context;
+		const styles = {
+			backgroundColor: isDarkMode ? "black" : "white",
+			width: "100vw",
+			height: "100vh"
+		};
+		return <div style={styles}>{this.props.children}</div>;
 	}
 }
 
-export default withStyles(styles)(PageContent);
+export default PageContent;

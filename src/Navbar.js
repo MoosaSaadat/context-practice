@@ -6,27 +6,37 @@ import Typography from "@material-ui/core/Typography";
 import InputBase from "@material-ui/core/InputBase";
 import Switch from "@material-ui/core/Switch";
 import SearchIcon from "@material-ui/icons/Search";
+import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
 import { withStyles } from "@material-ui/core/styles";
+import { ThemeContext } from "./contexts/ThemeContext";
+import { withLanguageContext } from "./contexts/LanguageContext";
 import styles from "./styles/NavbarStyles";
 
 class Navbar extends Component {
+	static contextType = ThemeContext;
 	render () {
-		const { classes } = this.props;
+		const { classes, languageContext } = this.props;
+		const { toggleTheme, isDarkMode } = this.context;
+		const languageTranslation = {
+			english: "Sign In Form",
+			french: "Formulaire de connexion",
+			spanish: "Formulario de registro"
+		};
 		return (
 			<div className={classes.root}>
-				<AppBar position="static">
+				<AppBar position="static" color={isDarkMode ? "primary" : "default"}>
 					<Toolbar>
 						<IconButton
 							edge="start"
 							className={classes.menuButton}
 							color="inherit"
 							aria-label="Current Language">
-							<span>:)</span>
+							<VerifiedUserIcon />
 						</IconButton>
 						<Typography className={classes.title} variant="h6" noWrap>
-							Material-UI
+							{languageTranslation[languageContext.language]}
 						</Typography>
-						<Switch />
+						<Switch onChange={toggleTheme} />
 						<div className={classes.search}>
 							<div className={classes.searchIcon}>
 								<SearchIcon />
@@ -47,4 +57,4 @@ class Navbar extends Component {
 	}
 }
 
-export default withStyles(styles)(Navbar);
+export default withLanguageContext(withStyles(styles)(Navbar));
